@@ -14,7 +14,7 @@ def extract_section(file_path, section_title):
     inside_section = False
 
     with open(file_path, 'r', encoding='utf-8') as file:
-        if section_title=="*ALL*":
+        if section_title=="EVERYTHING":
             return file.read()
         for line in file:
             # Check if we reached the section we want
@@ -38,7 +38,8 @@ def decompose_challenge(challenge):
     references=references.split("\n")
     ref_pairs=[]
     for ref in references:
-        filename, title = ref.split('|')
+        if ref=="":continue
+        filename, title = ref.split("|")
         ref_pairs.append(['docs\\'+filename+".md",title])
     return question, prof_answer, ref_pairs
 def create_ref(ref_pairs):
