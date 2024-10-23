@@ -37,25 +37,28 @@ def extract_section(file_path, section_title):
     :param section_title: The title of the section to extract (e.g., "## Title").
     :return: The content of the section as a string, or None if the section is not found.
     """
-    section_heading = f"## {section_title}"
+    section_heading = section_title
     section_content = []
     inside_section = False
 
     with open(file_path, 'r', encoding='utf-8') as file:
-        if section_title=="EVERYTHING":
-            return file.read()
+        titles = section_title.split('|')
+        current_level = 0
+        title_levels = ["#", "##", "###", "####", "#####", "######"]
+        
         for line in file:
-            # Check if we reached the section we want
-            if section_heading in line.strip():
+            stripped_line = line.strip()
+            if current_level < len(titles) and stripped_line.startswith(title_levels[current_level]) and titles[current_level] in stripped_line:
+                current_level += 1
+            if current_level == len(titles):
                 inside_section = True
                 continue
-
-            # If we're inside the section, capture the content
+            
             if inside_section:
-                # If we hit another section heading (starting with ##), stop
-                if line.startswith("## "):
+                if any(stripped_line.startswith(level) for level in title_levels[:current_level]):
                     break
-                section_content.append(line)
+            section_content.append(line)
+
 
     return ''.join(section_content).strip() if section_content else None
 

@@ -50,6 +50,28 @@ Beware, text literals use double-quote: `"hello"`.
 Path literals, only used for schemas, use single-quotes: `'myfile.csv'`.
 Do not attempt to use single-quote anywhere BUT in path schemas.
 
+## Your first script
+
+Every script must display at least _one_ dashboard _tile_. The following script illustrates how to generate a dashboard that contains a single tile displaying _Hello World!_.
+
+```envision
+greeting = "Hello World!" 
+show label greeting
+```
+
+All the statements that start with the keyword `show` indicate that a _tile_ will be displayed. Tiles are the display mechanism provided by Envision. All the tiles present in a script are consolidated in a _dashboard_.
+
+Attention that if we use "show label", the format should be 
+```envision
+show label labelContent
+```
+without writing "with" and the label does not have a title. this is different from show table : 
+```envision
+show table "ChartName" with tableContent
+```
+
+The value `"Hello World!"` is called a **text literal**, a value that appears verbatim in the code. The operator `=` is the **assignment operator**.
+
 ## Tables
 
 Envision adopts array programming, processing whole columns at once, like SQL.
