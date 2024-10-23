@@ -135,7 +135,7 @@ def pipeline_score_allchallenge(indexes,coder_personality):
 
 # %% main
 if __name__ == '__main__':
-# (these questions include grammar rules not covered in the documentation)
+    # (these questions include grammar rules not covered in the documentation)
     output_folder = os.path.join("output","LLMasJudge")
     indexes = [f.split('.')[0] for f in os.listdir('mychallenges') if f.endswith('.md') and f!='description.md']
     pipeline_score_allchallenge(indexes,coder_personality)
